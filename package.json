@@ -19,12 +19,12 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.10",
-    "tscircuit": "^0.0.1261",
+    "tscircuit": "^0.0.1282",
     "typescript": "^5.0.0"
   },
   "author": "abse",
   "dependencies": {
-    "@tsci/seveibar.keyboard-utils": "^0.0.18",
+    "@tsci/abse.keyboard-utils": "^0.0.19",
     "@tscircuit/common": "^0.0.36"
   }
 }

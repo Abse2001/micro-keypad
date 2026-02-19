@@ -1,0 +1,58 @@
+export type I2CDisplayHeader4Props = {
+  name: string
+  pcbX?: number | string
+  pcbY?: number | string
+  pcbRotation?: number | string
+  connections?: Partial<{
+    GND: string
+    VCC: string
+    SCL: string
+    SDA: string
+  }>
+}
+export const I2CDisplayHeader4 = ({
+  name,
+  pcbX,
+  pcbY,
+  pcbRotation,
+  connections,
+}: I2CDisplayHeader4Props) => {
+  // 4 pins on 2.54mm pitch, centered around origin:
+  // x = -3.81, -1.27, +1.27, +3.81  (i.e. ±1.5P and ±0.5P)
+  const P = 2.54
+  const xs = [-1.5 * P, -0.5 * P, 0.5 * P, 1.5 * P]
+
+  return (
+    <chip
+      name={name}
+      pcbX={pcbX}
+      pcbY={pcbY}
+      pcbRotation={pcbRotation}
+      connections={connections}
+      pinLabels={{
+        pin1: "GND",
+        pin2: "VCC",
+        pin3: "SCL",
+        pin4: "SDA",
+      }}
+      footprint={
+        <footprint>
+          {xs.map((x, i) => (
+            <platedhole
+              portHints={[String(i + 1)]}
+              pcbX={x}
+              pcbY={0}
+              holeDiameter="1.0mm"
+              outerDiameter="1.8mm"
+              shape="circle"
+            />
+          ))}
+          <hole pcbX={-10} pcbY={-0.5} diameter="3.2mm" />
+          <hole pcbX={10} pcbY={-0.5} diameter="3.2mm" />
+          {/* <hole pcbX={-10} pcbY={-23.3} diameter="3.2mm" />
+          <hole pcbX={10} pcbY={-23.3} diameter="3.2mm" /> */}
+        </footprint>
+      }
+    />
+  )
+}
