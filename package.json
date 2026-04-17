@@ -1,6 +1,6 @@
 {
   "name": "@tsci/abse.micro-keypad",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "A tscircuit component package",
   "main": "index.tsx",
   "keywords": [
@@ -19,12 +19,12 @@
   },
   "devDependencies": {
     "@types/react": "^19.2.10",
-    "tscircuit": "^0.0.1282",
+    "tscircuit": "^0.0.1599",
     "typescript": "^5.0.0"
   },
   "author": "abse",
   "dependencies": {
-    "@tsci/abse.keyboard-utils": "^0.0.19",
+    "@tsci/abse.keyboard-utils": "^0.0.23",
     "@tscircuit/common": "^0.0.36"
   }
 }
