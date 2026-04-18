@@ -1,8 +1,7 @@
-import { XiaoReceiver } from "@tscircuit/common"
 import { EC11E09204A4 } from "./imports/EC11E09204A4"
 import { I2CDisplayHeader4 } from "./I2CDisplayHeader4"
 import { KeyMatrix } from "@tsci/abse.keyboard-utils"
-import { TCA9535PWR } from "./imports/TCA9535PWR"
+import { PICO } from "./imports/PICO"
 
 // biome-ignore lint: This file contains keyboard layout data
 export const custom4x4 = [
@@ -14,31 +13,45 @@ export const custom4x4 = [
 
 export default () => {
   return (
-    <board width={100} height={110} autorouterVersion="v4" layers={4} >
+    <board width={82} height={138} autorouterVersion="v4" layers={2}  >
       <KeyMatrix
-        pcbX={-0.7}
-        pcbY={-9}
-        colToMicroPin={["net.IOX_P04", "net.IOX_P05", "net.IOX_P06", "net.IOX_P07"]}
-        rowToMicroPin={["net.IOX_P00", "net.IOX_P01", "net.IOX_P02", "net.IOX_P03"]}
+        pcbX={9}
+        pcbY={-15}
+        colToMicroPin={["net.MATRIX_COL0", "net.MATRIX_COL1", "net.MATRIX_COL2", "net.MATRIX_COL3"]}
+        rowToMicroPin={["net.MATRIX_ROW0", "net.MATRIX_ROW1", "net.MATRIX_ROW2", "net.MATRIX_ROW3"]}
         layout={custom4x4}
       />
 
-      <XiaoReceiver
+      <PICO
         name="U1"
-        pcbY={38}
+        pcbY={55}
+        pcbX={14}
+        layer="bottom"
         connections={{
-          pin1: "net.IOX_INT",
-          pin5: "net.I2C_SDA",
-          pin6: "net.I2C_SCL",
-          pin9: "net.GND",
-          pin10: "net.V3_3",
+          GP0: "net.I2C_SDA",
+          GP1: "net.I2C_SCL",
+          GP2: "net.MATRIX_ROW0",
+          GP3: "net.MATRIX_ROW1",
+          GP4: "net.MATRIX_ROW2",
+          GP5: "net.MATRIX_ROW3",
+          GP6: "net.MATRIX_COL0",
+          GP7: "net.MATRIX_COL1",
+          GP8: "net.MATRIX_COL2",
+          GP9: "net.MATRIX_COL3",
+          GP10: "net.ENC_L_A_FILTER",
+          GP11: "net.ENC_L_B_FILTER",
+          GP12: "net.ENC_R_A_FILTER",
+          GP13: "net.ENC_R_B_FILTER",
+          GND8: "net.GND",
+          GND1: "net.GND",
+          pin36: "net.V3_3",
         }}
       />
       <EC11E09204A4
         name="U2"
-        pcbY={40}
+        pcbY={26}
         pcbX={-25}
-        layer="bottom"
+        layer="top"
         connections={{
           pin9: "net.GND",
           pin10: "net.ENC_L_B",
@@ -47,46 +60,18 @@ export default () => {
       />
       <EC11E09204A4
         name="U3"
-        pcbY={40}
+        pcbY={26}
         pcbX={25}
-        layer="bottom"
+        layer="top"
         connections={{
           pin9: "net.GND",
           pin10: "net.ENC_R_B",
           pin8: "net.ENC_R_A",
         }}
       />
-      <TCA9535PWR
-        name="U4"
-        pcbY={-10}
-        pcbX={42}
-        pcbRotation={-90}
-        connections={{
-          INT: "net.IOX_INT",
-          A1: "net.GND",
-          A2: "net.GND",
-          P00: "net.IOX_P00",
-          P01: "net.IOX_P01",
-          P02: "net.IOX_P02",
-          P03: "net.IOX_P03",
-          P04: "net.IOX_P04",
-          P05: "net.IOX_P05",
-          P06: "net.IOX_P06",
-          P07: "net.IOX_P07",
-          GND: "net.GND",
-          P10: "net.ENC_L_A",
-          P11: "net.ENC_L_B",
-          P12: "net.ENC_R_A",
-          P13: "net.ENC_R_B",
-          A0: "net.GND",
-          SCL: "net.I2C_SCL",
-          SDA: "net.I2C_SDA",
-          VCC: "net.V3_3",
-        }}
-      />
       <I2CDisplayHeader4
         name="J1"
-        pcbY={24}
+        pcbY={38}
         pcbX={0}
         pcbRotation={180}
         connections={{
@@ -101,7 +86,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={27.5}
-        pcbY={28}
+        pcbY={14}
         connections={{ pin1: "net.V3_3", pin2: "net.ENC_R_A" }}
       />
       <resistor
@@ -109,7 +94,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={22.5}
-        pcbY={28}
+        pcbY={14}
         connections={{ pin1: "net.ENC_R_B", pin2: "net.V3_3" }}
       />
       <resistor
@@ -117,7 +102,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={27.5}
-        pcbY={26}
+        pcbY={12}
         connections={{ pin1: "net.ENC_R_A_FILTER", pin2: "net.ENC_R_A" }}
       />
       <resistor
@@ -125,7 +110,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={22.5}
-        pcbY={26}
+        pcbY={12}
         pcbRotation={180}
         connections={{ pin1: "net.ENC_R_B_FILTER", pin2: "net.ENC_R_B" }}
       />
@@ -135,7 +120,7 @@ export default () => {
         footprint={"0603"}
         pcbRotation={180}
         pcbX={27.5}
-        pcbY={30}
+        pcbY={16}
         connections={{ pin1: "net.ENC_R_A_FILTER", pin2: "net.GND" }}
       />
       <capacitor
@@ -144,7 +129,7 @@ export default () => {
         footprint={"0603"}
         pcbRotation={180}
         pcbX={22.5}
-        pcbY={30}
+        pcbY={16}
         connections={{ pin1: "net.GND", pin2: "net.ENC_R_B_FILTER" }}
       />
 
@@ -153,7 +138,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={-27.5}
-        pcbY={28}
+        pcbY={14}
         connections={{ pin1: "net.ENC_L_B", pin2: "net.V3_3" }}
       />
       <resistor
@@ -161,7 +146,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={-22.5}
-        pcbY={28}
+        pcbY={14}
         connections={{ pin1: "net.V3_3", pin2: "net.ENC_L_A" }}
       />
       <resistor
@@ -169,7 +154,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={-27.5}
-        pcbY={26}
+        pcbY={12}
         connections={{ pin1: "net.ENC_L_B_FILTER", pin2: "net.ENC_L_B" }}
       />
       <resistor
@@ -177,7 +162,7 @@ export default () => {
         resistance={"10k"}
         footprint={"0603"}
         pcbX={-22.5}
-        pcbY={26}
+        pcbY={12}
         pcbRotation={180}
         connections={{ pin1: "net.ENC_L_A_FILTER", pin2: "net.ENC_L_A" }}
       />
@@ -187,7 +172,7 @@ export default () => {
         footprint={"0603"}
         pcbRotation={180}
         pcbX={-27.5}
-        pcbY={30}
+        pcbY={16}
         connections={{ pin1: "net.ENC_L_B_FILTER", pin2: "net.GND" }}
       />
       <capacitor
@@ -196,7 +181,7 @@ export default () => {
         footprint={"0603"}
         pcbRotation={180}
         pcbX={-22.5}
-        pcbY={30}
+        pcbY={16}
         connections={{ pin1: "net.GND", pin2: "net.ENC_L_A_FILTER" }}
       />
 
