@@ -1,6 +1,6 @@
 {
-  "name": "@tsci/abse.micro-keypad",
-  "version": "1.0.4",
+  "name": "@tsci/abse.keypad",
+  "version": "1.0.7",
   "description": "A tscircuit component package",
   "main": "index.tsx",
   "keywords": [
